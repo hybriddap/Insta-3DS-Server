@@ -1,4 +1,5 @@
 from flask import Blueprint, Response, request
+import io
 from .utils.ppm_converter import convert_ppm_to_png
 from .utils.imgur import upload_to_imgur
 from .utils.meta import publishToMeta
@@ -18,6 +19,17 @@ def convert():
 def upload_imgur():
     png_data = request.files["file"]
     return upload_to_imgur(png_data)
+
+@main.route('/convert-upload-imgur', methods=['POST'])
+def convert_and_upload():
+    data = request.data
+    #Optionally write locally?
+    # with open('received.ppm', 'wb') as f:
+    #     f.write(data)
+
+    png_data=convert_ppm_to_png(io.BytesIO(data)) 
+    print("Successfully converted to png!")
+    return upload_to_imgur(png_data) #return link
     
 @main.route("/upload-meta", methods=["POST"])
 def upload_meta():

@@ -130,7 +130,7 @@ def publishToInsta(facebookPageID,token,caption,image_url):
 def publishToMeta(platform, token, caption, image_url):
     facebookPageID = get_facebook_page_id(token)
     if not facebookPageID:
-        return Response(response="Unable to retrieve Facebook Page ID! Add your Access Token first!", status=500)
+        return Response(response="Unable to retrieve Facebook Page ID! Make sure your Access Token is correct and isnt expired!", status=500)
 
     #For Facebook
     if platform == 'facebook':
