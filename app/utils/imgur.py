@@ -1,11 +1,15 @@
 import requests
 import base64
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def upload_to_imgur(png_data):
     png_file = png_data.read()
     encoded_image = base64.b64encode(png_file)
     headers = {
-        'Authorization': f'Client-ID {"REMOVED"}'
+        'Authorization': f'Client-ID {os.getenv("imgur_client_id")}'
     }
     data = {
         'image': encoded_image,
