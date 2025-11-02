@@ -6,16 +6,16 @@ from .utils.meta import publishToMeta
 
 main = Blueprint("main", __name__)
 
-@main.route("/hello")
+@main.route("/hello")   #Unused
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@main.route("/convert", methods=["POST"])
+@main.route("/convert", methods=["POST"])   #Unused
 def convert():
     ppm_file = request.files["file"]
     return convert_ppm_to_png(ppm_file)
 
-@main.route("/upload-imgur", methods=["POST"])
+@main.route("/upload-imgur", methods=["POST"])  #Unused
 def upload_imgur():
     png_data = request.files["file"]
     return upload_to_imgur(png_data)
@@ -26,9 +26,8 @@ def convert_and_upload():
     #Optionally write locally?
     # with open('received.ppm', 'wb') as f:
     #     f.write(data)
-
+    #return Response(response="h - Upload blocked by server. Debug.",status=200) #for debugging
     png_data=convert_ppm_to_png(io.BytesIO(data)) 
-    print("Successfully converted to png!")
     return upload_to_imgur(png_data) #return link
     
 @main.route("/upload-meta", methods=["POST"])
@@ -36,6 +35,7 @@ def upload_meta():
     token=request.json['token']
     caption=request.json['caption']
     image_url=request.json['image_url']
+    #return Response(response="Upload blocked by server. Debug.",status=500) #for debugging
     if (not token or not caption or not image_url):
         return Response(response="No token or caption or image url provided!",status=500)
     return publishToMeta('insta',token,caption,image_url)

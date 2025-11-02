@@ -19,15 +19,15 @@ def upload_to_imgur(png_data):
         result = response.json()
 
         if result['success']:
-            print("Image uploaded successfully!")
-            print(f"Link: {result['data']['link']}")
-            print(f"Deletehash: {result['data']['deletehash']}")
+            #print("Image uploaded successfully!")
+            #print(f"Link: {result['data']['link']}")
+            #print(f"Deletehash: {result['data']['deletehash']}")
             return result['data']['link']
         else:
-            print("Image upload failed.")
-            print(f"Error: {result['data']['error']}")
+            #print("Image upload failed.")
+            #print(f"Error: {result['data']['error']}")
             return "Image upload failed."
     except:
-        print(f"An error occurred during the request.")
+        #print(f"An error occurred during the request.")
         return "An error occurred during the request."
 
