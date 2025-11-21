@@ -2,3 +2,4 @@
 /.venv/
 received.ppm
 .env
+.DS_Store
